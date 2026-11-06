@@ -10,30 +10,30 @@ The name is the mission. Me and Us, talking to each other, sharing the moments t
 
 ## What It Does
 
-| Feature | Description |
-|---|---|
-| **Instant Rooms** | Generate a collision-resistant 8-character key (e.g. `K8X2-M9P4`) or type your own to enter a room. No sign-up. No waiting. |
-| **HD Video + Audio** | Camera and microphone access is negotiated via WebRTC with graceful fallback — even Incognito tabs and restricted browsers are handled without crashing. |
-| **Screen Sharing** | Share your full screen or any application window live into the room. Stops cleanly on native browser stop or the in-app button. |
-| **Multi-Peer Support** | Every participant is a separate Cloudflare Calls session. Peers are discovered in real-time via Socket.io signaling and media is pulled directly from the SFU — not through your device. |
-| **Dark / Light Theme** | A full theme toggle persists through the session via a `data-theme` HTML attribute, driving a SCSS variable system across every component. |
-| **Mic / Camera Toggle** | Mute your microphone or pause your camera on the fly within a live call without re-negotiating the WebRTC session. |
+| Feature                 | Description                                                                                                                                                                              |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Instant Rooms**       | Generate a collision-resistant 8-character key (e.g. `K8X2-M9P4`) or type your own to enter a room. No sign-up. No waiting.                                                              |
+| **HD Video + Audio**    | Camera and microphone access is negotiated via WebRTC with graceful fallback — even Incognito tabs and restricted browsers are handled without crashing.                                 |
+| **Screen Sharing**      | Share your full screen or any application window live into the room. Stops cleanly on native browser stop or the in-app button.                                                          |
+| **Multi-Peer Support**  | Every participant is a separate Cloudflare Calls session. Peers are discovered in real-time via Socket.io signaling and media is pulled directly from the SFU — not through your device. |
+| **Dark / Light Theme**  | A full theme toggle persists through the session via a `data-theme` HTML attribute, driving a SCSS variable system across every component.                                               |
+| **Mic / Camera Toggle** | Mute your microphone or pause your camera on the fly within a live call without re-negotiating the WebRTC session.                                                                       |
 
 ---
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| **Frontend** | React 19 + TypeScript 6, bundled with Vite 8 |
-| **Styling** | SCSS (Sass) — component-scoped stylesheets with a shared design token system for dark and light modes |
-| **State** | Zustand 5 |
-| **Routing** | React Router DOM 7 |
-| **Animations** | GSAP 3 |
-| **Signaling** | Socket.io Client 4 over WebSocket / polling fallback |
-| **Media Transport** | WebRTC via Cloudflare Calls SFU (STUN: Cloudflare) |
-| **Backend** | Custom Node.js/Express proxy on Render, configurable via `VITE_BACKEND_URL` |
-| **Linting** | ESLint 10 + typescript-eslint 8 |
+| Layer               | Technology                                                                                            |
+| ------------------- | ----------------------------------------------------------------------------------------------------- |
+| **Frontend**        | React 19 + TypeScript 6, bundled with Vite 8                                                          |
+| **Styling**         | SCSS (Sass) — component-scoped stylesheets with a shared design token system for dark and light modes |
+| **State**           | Zustand 5                                                                                             |
+| **Routing**         | React Router DOM 7                                                                                    |
+| **Animations**      | GSAP 3                                                                                                |
+| **Signaling**       | Socket.io Client 4 over WebSocket / polling fallback                                                  |
+| **Media Transport** | WebRTC via Cloudflare Calls SFU (STUN: Cloudflare)                                                    |
+| **Backend**         | Custom Node.js/Express proxy on Render, configurable via `VITE_BACKEND_URL`                           |
+| **Linting**         | ESLint 10 + typescript-eslint 8                                                                       |
 
 ---
 
@@ -96,7 +96,7 @@ src/
 npm install
 ```
 
-**2. Set your backend URL** *(optional)*
+**2. Set your backend URL** _(optional)_
 
 Create a `.env` file in the project root:
 
@@ -118,19 +118,19 @@ Navigate to `http://localhost:5173`, generate a room key, share it with a friend
 
 ### Available Scripts
 
-| Command | Description |
-|---|---|
-| `npm run dev` | Start Vite development server with HMR |
-| `npm run build` | Type-check with tsc and produce a production bundle |
-| `npm run preview` | Preview the production build locally |
-| `npm run lint` | Run ESLint across the entire project |
+| Command           | Description                                         |
+| ----------------- | --------------------------------------------------- |
+| `npm run dev`     | Start Vite development server with HMR              |
+| `npm run build`   | Type-check with tsc and produce a production bundle |
+| `npm run preview` | Preview the production build locally                |
+| `npm run lint`    | Run ESLint across the entire project                |
 
 ---
 
 ## Environment Variables
 
-| Variable | Default | Description |
-|---|---|---|
+| Variable           | Default                 | Description                                                        |
+| ------------------ | ----------------------- | ------------------------------------------------------------------ |
 | `VITE_BACKEND_URL` | `http://localhost:6003` | Backend proxy for the Cloudflare Calls API and Socket.io signaling |
 
 ---
@@ -147,7 +147,7 @@ Simultaneous SDP renegotiations from multiple peers joining at once are serializ
 Cloudflare Calls does not label tracks by type. The app resolves whether an incoming mid is `camera` or `screen` by cross-referencing the peer's published track metadata received over Socket.io.
 
 **Mid mapping**
-`trackToInfoRef` maps each SFU-assigned mid to a `sessionId` and type *before* `setRemoteDescription` is called, because the `ontrack` event fires synchronously during that call and needs the mapping to already exist.
+`trackToInfoRef` maps each SFU-assigned mid to a `sessionId` and type _before_ `setRemoteDescription` is called, because the `ontrack` event fires synchronously during that call and needs the mapping to already exist.
 
 ---
 
